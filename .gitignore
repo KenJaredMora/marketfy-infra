@@ -1,0 +1,48 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Environment files - NEVER COMMIT THESE
+.env
+.env.*
+**/.env
+**/.env.*
+*.pem
+*.key
+
+# AWS credentials - NEVER COMMIT
+aws_credentials
+credentials
+config
+
+# Secrets
+secrets.yml
+secrets.json
+*.secret
+
+# OS
+.DS_Store
+Thumbs.db
+*~
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Docker
+docker-compose.override.yml
