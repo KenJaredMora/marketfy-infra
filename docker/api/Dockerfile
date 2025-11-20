@@ -46,6 +46,10 @@ RUN npm ci --omit=dev && npm cache clean --force
 COPY --chown=nestjs:nodejs --from=build /app/dist ./dist
 COPY --chown=nestjs:nodejs --from=build /app/node_modules/.prisma ./node_modules/.prisma
 
+# Copy entrypoint script and fix line endings
+COPY --chown=nestjs:nodejs docker-entrypoint.sh ./
+RUN sed -i 's/\r$//' docker-entrypoint.sh && chmod +x docker-entrypoint.sh
+
 # Switch to non-root user
 USER nestjs
 
@@ -59,6 +63,6 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s \
 
 EXPOSE 3000
 
-# Use dumb-init to handle signals properly
+# Use dumb-init to handle signals properly and run entrypoint script
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["node", "dist/src/main.js"]
+CMD ["sh", "docker-entrypoint.sh"]
