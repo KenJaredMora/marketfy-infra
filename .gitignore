@@ -1,48 +1,109 @@
-# Terraform
+# ====================================================================================
+# MARKETFY INFRASTRUCTURE .GITIGNORE
+# ====================================================================================
+
+# ====================================================================================
+# ⚠️ TERRAFORM STATE - StayInLocal - NEVER COMMIT THESE ⚠️
+# Contains: Infrastructure details, resource IDs, sensitive configuration
+# ====================================================================================
 **/.terraform/*
 *.tfstate
 *.tfstate.*
-*.tfvars
-*.tfvars.json
-.terraform.lock.hcl
+*.tfstate.backup
+.terraform/
 crash.log
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+.terraform.lock.hcl.backup
 
-# Environment files - NEVER COMMIT THESE
+# ====================================================================================
+# ⚠️ TERRAFORM VARIABLES - StayInLocal - NEVER COMMIT THESE ⚠️
+# Contains: AWS credentials, database passwords, JWT secrets, API keys
+# ====================================================================================
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+terraform.rc
+.terraformrc
+
+# ====================================================================================
+# ⚠️ ENVIRONMENT FILES - StayInLocal - NEVER COMMIT THESE ⚠️
+# Contains: Database passwords, JWT secrets, API keys, service credentials
+# ====================================================================================
 .env
 .env.*
+.env.local
+.env.development
+.env.production
+.env.test
+!.env.example
 **/.env
 **/.env.*
-*.pem
-*.key
 
-# AWS credentials - NEVER COMMIT
+# ====================================================================================
+# ⚠️ AWS CREDENTIALS - StayInLocal - NEVER COMMIT THESE ⚠️
+# Contains: AWS access keys, secret keys, session tokens
+# ====================================================================================
+.aws/
 aws_credentials
 credentials
 config
+*.pem
+*.key
+*.ppk
+*.cer
+*.crt
 
-# Secrets
+# ====================================================================================
+# ⚠️ SECRETS & KEYS - StayInLocal - NEVER COMMIT THESE ⚠️
+# Contains: Service secrets, encryption keys, certificates
+# ====================================================================================
 secrets.yml
+secrets.yaml
 secrets.json
 *.secret
+*.private
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.p12
+*.pfx
 
-# OS
+# ====================================================================================
+# Docker Override Files
+# ====================================================================================
+docker-compose.override.yml
+docker-compose.local.yml
+
+# ====================================================================================
+# OS Files
+# ====================================================================================
 .DS_Store
 Thumbs.db
 *~
+._*
 
-# IDE
+# ====================================================================================
+# IDE Files
+# ====================================================================================
 .vscode/
 .idea/
 *.swp
 *.swo
 
+# ====================================================================================
 # Logs
+# ====================================================================================
 *.log
 logs/
 
-# Docker
-docker-compose.override.yml
+# ====================================================================================
+# Temporary Files
+# ====================================================================================
+*.tmp
+*.temp
+.temp/
+.tmp/
