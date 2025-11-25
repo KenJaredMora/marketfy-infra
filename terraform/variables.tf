@@ -1,8 +1,4 @@
-# ============================================
-# Marketfy Infrastructure Variables
-# ============================================
 
-# Basic Configuration
 variable "aws_region" {
   description = "AWS region for resources"
   type        = string
@@ -154,7 +150,7 @@ variable "enable_waf" {
 variable "allowed_cidr_blocks" {
   description = "CIDR blocks allowed to access the application"
   type        = list(string)
-  default     = ["0.0.0.0/0"] # Allow all by default, restrict in production
+  default     = ["0.0.0.0/0"] # Allow all by default for this project, restrict in production or staging
 }
 
 variable "admin_cidr_blocks" {

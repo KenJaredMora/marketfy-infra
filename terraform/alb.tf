@@ -1,7 +1,3 @@
-# ==================================
-# Application Load Balancer
-# ==================================
-
 # Application Load Balancer
 resource "aws_lb" "marketfy" {
   name               = "${var.project_name}-alb"

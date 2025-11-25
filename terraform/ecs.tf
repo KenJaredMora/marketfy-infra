@@ -1,5 +1,5 @@
 # ==================================
-# ECS Cluster on EC2 (Free-tier friendly)
+# ECS Cluster on EC2 (Free-tier aproach)
 # ==================================
 
 # ECS Cluster

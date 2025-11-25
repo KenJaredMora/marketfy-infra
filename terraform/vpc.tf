@@ -1,7 +1,3 @@
-# ==================================
-# VPC Configuration for Marketfy
-# ==================================
-
 # VPC
 resource "aws_vpc" "marketfy" {
   cidr_block           = var.vpc_cidr

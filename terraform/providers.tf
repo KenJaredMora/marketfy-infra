@@ -12,8 +12,8 @@ terraform {
     }
   }
 
-  # Optional: Remote backend for state management
-  # Uncomment and configure after creating S3 bucket
+  # Optional: Remote backend for my state management
+  # To make this option able for the project uncomment and configure after creating S3 bucket
   # backend "s3" {
   #   bucket         = "your-terraform-state-bucket"
   #   key            = "marketfy/terraform.tfstate"
