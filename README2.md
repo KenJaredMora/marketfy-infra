@@ -223,7 +223,7 @@ UNLICENSED - Private project
 
 ## 👥 Authors
 
-Deloitte Java Project Team
+Kenyon Jared Mora Zamora
 
 ## 🆘 Support
 
