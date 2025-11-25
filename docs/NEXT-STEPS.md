@@ -18,6 +18,7 @@ To complete the infrastructure, you need to create the remaining Terraform files
 Create file: `terraform/vpc.tf`
 
 This file should include:
+
 - VPC with CIDR block
 - Public subnets (2 in different AZs)
 - Private subnets (2 in different AZs)
@@ -33,6 +34,7 @@ This file should include:
 Create file: `terraform/security.tf`
 
 Define security groups for:
+
 - ALB (allow HTTP/HTTPS from internet)
 - ECS instances (allow traffic from ALB)
 - RDS (allow traffic from ECS only)
@@ -42,6 +44,7 @@ Define security groups for:
 Create file: `terraform/rds.tf`
 
 Configure:
+
 - RDS subnet group
 - RDS instance (PostgreSQL 15+)
 - Instance class: `db.t3.micro` (free tier)
@@ -55,11 +58,13 @@ Configure:
 Create file: `terraform/ecr.tf`
 
 Create three ECR repositories:
+
 - `marketfy-api`
 - `marketfy-angular`
 - `marketfy-react`
 
 Enable:
+
 - Image scanning on push
 - Lifecycle policies (optional)
 
@@ -68,6 +73,7 @@ Enable:
 Create file: `terraform/iam.tf`
 
 Create roles for:
+
 - ECS task execution role
 - ECS task role (for app permissions)
 - EC2 instance role for ECS
@@ -77,6 +83,7 @@ Create roles for:
 Create file: `terraform/ecs.tf`
 
 Configure:
+
 - ECS cluster
 - Launch template for EC2 instances
 - Auto Scaling Group
@@ -89,6 +96,7 @@ Configure:
 Create file: `terraform/alb.tf`
 
 Set up:
+
 - Application Load Balancer
 - Target groups (API, Angular, React)
 - Listener (HTTP, optionally HTTPS)
@@ -102,6 +110,7 @@ Set up:
 Create file: `terraform/cloudwatch.tf`
 
 Configure:
+
 - Log groups for each service
 - Log retention policies
 - Metric alarms (optional but recommended)
@@ -111,6 +120,7 @@ Configure:
 Create file: `terraform/secrets.tf`
 
 Store secrets in AWS Secrets Manager:
+
 - Database password
 - JWT secret
 - Any other sensitive configuration
@@ -120,6 +130,7 @@ Store secrets in AWS Secrets Manager:
 Create file: `terraform/outputs.tf`
 
 Output important values:
+
 - ALB DNS name
 - ECR repository URLs
 - RDS endpoint
@@ -201,12 +212,14 @@ module "vpc" {
 ```
 
 **Advantages**:
+
 - Less code to write
 - Battle-tested modules
 - Best practices built-in
 
 **Where to find modules**:
-- https://registry.terraform.io/browse/modules
+
+- <https://registry.terraform.io/browse/modules>
 - Search for: `vpc`, `ecs`, `rds`, `alb`, etc.
 
 ---
@@ -214,15 +227,18 @@ module "vpc" {
 ## 📚 Resources to Help You
 
 ### Official Documentation
+
 - [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
 - [AWS ECS Documentation](https://docs.aws.amazon.com/ecs/)
 - [Terraform AWS Modules](https://registry.terraform.io/namespaces/terraform-aws-modules)
 
 ### Example Projects
+
 - [Terraform ECS Examples](https://github.com/terraform-aws-modules/terraform-aws-ecs/tree/master/examples)
 - [AWS Samples - ECS](https://github.com/aws-samples/ecs-refarch-cloudformation)
 
 ### Video Tutorials
+
 - YouTube: "Terraform AWS ECS"
 - YouTube: "Deploy Docker to AWS ECS"
 
@@ -259,32 +275,38 @@ module "vpc" {
 ## 🎯 Milestone Plan
 
 ### Phase 1: Foundation (1-2 days)
+
 - [ ] Complete all Terraform files
 - [ ] Test locally with docker-compose
 - [ ] Create AWS account and IAM user
 
 ### Phase 2: Basic Deployment (1 day)
+
 - [ ] Deploy VPC and networking
 - [ ] Deploy RDS database
 - [ ] Create ECR repositories
 
 ### Phase 3: Application Deployment (1 day)
+
 - [ ] Build and push Docker images
 - [ ] Deploy ECS cluster
 - [ ] Deploy ECS services
 
 ### Phase 4: Load Balancer (1 day)
+
 - [ ] Configure ALB
 - [ ] Set up listener rules
 - [ ] Test application access
 
 ### Phase 5: Monitoring and Security (1 day)
+
 - [ ] Set up CloudWatch logs
 - [ ] Configure alarms
 - [ ] Review security settings
 - [ ] Enable CloudTrail
 
 ### Phase 6: Production Readiness (ongoing)
+
 - [ ] Set up domain and SSL
 - [ ] Configure CI/CD
 - [ ] Load testing

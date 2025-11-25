@@ -8,12 +8,13 @@ Complete guide to deploying Marketfy to AWS using Terraform, Docker, and ECS.
 
 Install the following on your Windows machine:
 
-- **Docker Desktop**: https://www.docker.com/products/docker-desktop/
-- **Terraform**: https://developer.hashicorp.com/terraform/install
-- **AWS CLI v2**: https://aws.amazon.com/cli/
-- **Git**: https://git-scm.com/downloads
+- **Docker Desktop**: <https://www.docker.com/products/docker-desktop/>
+- **Terraform**: <https://developer.hashicorp.com/terraform/install>
+- **AWS CLI v2**: <https://aws.amazon.com/cli/>
+- **Git**: <https://git-scm.com/downloads>
 
 Verify installations:
+
 ```powershell
 docker --version
 terraform --version
@@ -24,7 +25,8 @@ git --version
 ### 2. AWS Account Setup
 
 #### 2.1 Create AWS Account
-- Sign up at https://aws.amazon.com/
+
+- Sign up at <https://aws.amazon.com/>
 - Verify you're eligible for free tier (12 months)
 
 #### 2.2 Create IAM User (IMPORTANT - Don't use root!)
@@ -38,6 +40,7 @@ git --version
 5. Save the Access Key ID and Secret Access Key
 
 #### 2.3 Enable MFA (STRONGLY RECOMMENDED)
+
 - Go to IAM → Your User → Security Credentials
 - Enable MFA device
 - Use Google Authenticator or Authy
@@ -49,12 +52,14 @@ aws configure
 ```
 
 Enter:
+
 - AWS Access Key ID: (from step 2.2)
 - AWS Secret Access Key: (from step 2.2)
 - Default region: `us-east-1`
 - Default output: `json`
 
 Test configuration:
+
 ```powershell
 aws sts get-caller-identity
 ```
@@ -66,11 +71,13 @@ aws sts get-caller-identity
 ### 1. Generate Strong Secrets
 
 Generate JWT Secret (PowerShell):
+
 ```powershell
 -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 64 | ForEach-Object {[char]$_})
 ```
 
 Generate DB Password (PowerShell):
+
 ```powershell
 -join ((48..57) + (65..90) + (97..122) + (33,35,37,38,42,43,45,61) | Get-Random -Count 32 | ForEach-Object {[char]$_})
 ```
@@ -100,10 +107,10 @@ docker-compose up --build
 
 ### 1.2 Verify Services
 
-- Angular Frontend: http://localhost:4200
-- React Frontend: http://localhost:5173
-- API Backend: http://localhost:3000
-- API Health Check: http://localhost:3000/health
+- Angular Frontend: <http://localhost:4200>
+- React Frontend: <http://localhost:5173>
+- API Backend: <http://localhost:3000>
+- API Health Check: <http://localhost:3000/health>
 
 ### 1.3 Test the Application
 
@@ -139,6 +146,7 @@ notepad terraform.tfvars
 ```
 
 **IMPORTANT**: Fill in:
+
 - `owner_email`: Your email
 - `db_password`: Strong password (generated in security step)
 - `jwt_secret`: Strong secret (generated in security step)
@@ -157,6 +165,7 @@ terraform plan -out=tfplan
 ```
 
 Review the plan carefully. You should see resources like:
+
 - VPC and subnets
 - Security groups
 - RDS database (PostgreSQL)
@@ -172,6 +181,7 @@ terraform apply tfplan
 ```
 
 This will take 10-15 minutes. Terraform will create:
+
 - ✅ Networking (VPC, subnets, route tables)
 - ✅ Database (RDS PostgreSQL)
 - ✅ Container registry (ECR)
@@ -189,6 +199,7 @@ This will take 10-15 minutes. Terraform will create:
 ### 3.1 Login to ECR
 
 Get your AWS Account ID:
+
 ```powershell
 $AWS_ACCOUNT_ID = (aws sts get-caller-identity --query Account --output text)
 $AWS_REGION = "us-east-1"
@@ -297,6 +308,7 @@ Write-Host "Application URL: http://$ALB_DNS"
 ### Services Not Starting
 
 Check ECS service events:
+
 ```powershell
 aws ecs describe-services `
   --cluster marketfy-cluster `
@@ -307,6 +319,7 @@ aws ecs describe-services `
 ### Database Connection Issues
 
 Check RDS endpoint:
+
 ```powershell
 cd terraform
 terraform output rds_endpoint
@@ -349,12 +362,14 @@ aws logs tail /ecs/marketfy-api --follow
 ### Free Tier Limits
 
 **First 12 months**:
+
 - EC2 t3.micro: 750 hours/month
 - RDS t3.micro: 750 hours/month
 - ALB: 750 hours/month
 - Data transfer: 15 GB/month
 
 **Always Free**:
+
 - CloudWatch: 10 custom metrics
 - Lambda: 1M requests/month
 - DynamoDB: 25 GB storage
@@ -362,6 +377,7 @@ aws logs tail /ecs/marketfy-api --follow
 ### Reduce Costs
 
 For development:
+
 - Stop services when not in use
 - Use `desired_count = 0` in Terraform
 - Delete unused resources
@@ -380,7 +396,7 @@ For development:
 - [x] Health checks enabled
 - [x] CloudTrail enabled (optional)
 
-### 🔒 Additional Recommendations
+### 🔒 Additional Recommendations for future refactors in my project
 
 1. **Enable HTTPS**:
    - Get ACM certificate
@@ -412,26 +428,33 @@ For development:
 
 ## 🧹 Cleanup
 
-To avoid charges, destroy all resources when done:
+**Option 1: Automated (Recommended)*
 
 ```powershell
-cd marketfy-infra/terraform
+cd "C:\Users\Kenyon Jared Zamora\Downloads\Proyecto Deloitte Java\marketfy-infra\scripts"
 
-# Preview what will be deleted
-terraform plan -destroy
-
-# Destroy all resources
-terraform destroy
+# Run automated destroy script
+.\destroy-infrastructure.ps1
 ```
 
-**IMPORTANT**: This will delete:
-- All ECS services and tasks
-- RDS database (and all data!)
-- Load balancer
-- VPC and networking
-- ECR images
+**Option 2: Manual (if you prefer)*
 
-Make sure to backup any important data first!
+```powershell
+cd "C:\Users\Kenyon Jared Zamora\Downloads\Proyecto Deloitte Java\marketfy-infra\terraform"
+
+# Destroy everything
+terraform destroy
+
+# Type: yes when prompted
+# Note: May require manual cleanup of ECS services and EC2 instances
+```
+
+**After destroy:**
+
+- Monthly cost: ~$0.05 (just ECR storage)
+- Docker images: Still in ECR ✅
+- Source code: Safe on our machine ✅
+- Terraform state: Preserved ✅
 
 ---
 
@@ -479,5 +502,3 @@ If you encounter issues:
 For AWS-specific issues, see AWS documentation or AWS Support.
 
 ---
-
-**Happy Deploying! 🚀**

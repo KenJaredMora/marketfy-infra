@@ -3,6 +3,7 @@
 ## 🔒 Pre-Deployment Security
 
 ### AWS Account Security
+
 - [ ] **Enable MFA** on root account
 - [ ] **Create IAM user** (don't use root for day-to-day)
 - [ ] **Enable MFA** on IAM user
@@ -12,6 +13,7 @@
 - [ ] **Review AWS Service Quotas** to prevent resource exhaustion
 
 ### Credential Management
+
 - [ ] **Never commit** `.env` or `.tfvars` files to git
 - [ ] **Use AWS Secrets Manager** for production secrets
 - [ ] **Rotate credentials** regularly (every 90 days)
@@ -20,6 +22,7 @@
 - [ ] **Store credentials** in password manager (1Password, LastPass, Bitwarden)
 
 ### Network Security
+
 - [ ] **Restrict IP access** in security groups (use your IP `/32`)
 - [ ] **Use private subnets** for database (not publicly accessible)
 - [ ] **Enable VPC Flow Logs** to monitor network traffic
@@ -31,6 +34,7 @@
 ## 🛡️ Infrastructure Security
 
 ### VPC and Networking
+
 - [ ] **Use at least 2 availability zones** for high availability
 - [ ] **Separate public and private subnets**
 - [ ] **Database in private subnet only** (no public IP)
@@ -38,7 +42,8 @@
 - [ ] **Enable VPC Flow Logs** to CloudWatch
 
 ### Security Groups Configuration
-```
+
+```md
 ALB Security Group:
 - Inbound: 80 (HTTP) from 0.0.0.0/0 or your IP
 - Inbound: 443 (HTTPS) from 0.0.0.0/0 or your IP
@@ -56,6 +61,7 @@ RDS Security Group:
 ```
 
 ### Database (RDS)
+
 - [ ] **Enable encryption at rest** (use AWS KMS)
 - [ ] **Enable encryption in transit** (SSL/TLS)
 - [ ] **Automated backups enabled** (retention 7-30 days)
@@ -66,6 +72,7 @@ RDS Security Group:
 - [ ] **Enable Performance Insights**
 
 ### Containers (ECS/Docker)
+
 - [ ] **Run containers as non-root user** (already configured in Dockerfiles)
 - [ ] **Scan images for vulnerabilities** (use ECR image scanning)
 - [ ] **Use specific image tags** (not `latest` in production)
@@ -74,6 +81,7 @@ RDS Security Group:
 - [ ] **Enable container insights** (CloudWatch)
 
 ### Load Balancer (ALB)
+
 - [ ] **Enable access logs** to S3
 - [ ] **Use HTTPS with valid certificate** (ACM)
 - [ ] **Force HTTPS redirect** (redirect HTTP to HTTPS)
@@ -86,6 +94,7 @@ RDS Security Group:
 ## 🔐 Application Security
 
 ### Authentication & Authorization
+
 - [ ] **Use strong JWT secret** (minimum 32 characters, random)
 - [ ] **Set reasonable token expiration** (1 hour for access tokens)
 - [ ] **Implement refresh tokens** for better security
@@ -94,6 +103,7 @@ RDS Security Group:
 - [ ] **Add CAPTCHA** for registration/login (optional)
 
 ### API Security
+
 - [ ] **Validate all inputs** (class-validator already implemented)
 - [ ] **Sanitize inputs** to prevent injection attacks
 - [ ] **Use CORS properly** (restrict origins in production)
@@ -104,6 +114,7 @@ RDS Security Group:
 - [ ] **Validate file uploads** (size, type, content)
 
 ### Frontend Security
+
 - [ ] **Use Content Security Policy (CSP)** headers
 - [ ] **Enable XSS protection** (already in nginx config)
 - [ ] **Prevent clickjacking** (X-Frame-Options: SAMEORIGIN)
@@ -113,6 +124,7 @@ RDS Security Group:
 - [ ] **Use HTTPS for all API calls**
 
 ### Environment Variables
+
 - [ ] **Never hardcode secrets** in code
 - [ ] **Use AWS Secrets Manager** for production
 - [ ] **Use environment-specific configs**
@@ -124,6 +136,7 @@ RDS Security Group:
 ## 🔍 Monitoring & Auditing
 
 ### CloudWatch
+
 - [ ] **Set up log groups** for all services
 - [ ] **Configure log retention** (7-30 days for dev, longer for prod)
 - [ ] **Create alarms** for critical metrics:
@@ -135,6 +148,7 @@ RDS Security Group:
 - [ ] **Enable container insights**
 
 ### CloudTrail
+
 - [ ] **Enable CloudTrail** in all regions
 - [ ] **Log to S3 bucket** with encryption
 - [ ] **Enable log file validation**
@@ -146,6 +160,7 @@ RDS Security Group:
   - Security group changes
 
 ### AWS Config
+
 - [ ] **Enable AWS Config** to track resource changes
 - [ ] **Set up Config Rules** for compliance:
   - S3 buckets not public
@@ -154,6 +169,7 @@ RDS Security Group:
 - [ ] **Review compliance dashboard** regularly
 
 ### Security Hub
+
 - [ ] **Enable AWS Security Hub**
 - [ ] **Enable default standards**:
   - AWS Foundational Security Best Practices
@@ -166,6 +182,7 @@ RDS Security Group:
 ## 🚨 Incident Response
 
 ### Preparation
+
 - [ ] **Document incident response plan**
 - [ ] **Create runbooks** for common issues
 - [ ] **Set up alerting** (email, SMS, Slack)
@@ -173,6 +190,7 @@ RDS Security Group:
 - [ ] **Test backup restoration** regularly
 
 ### Response Procedures
+
 If you detect a security incident:
 
 1. **Contain**:
@@ -200,11 +218,13 @@ If you detect a security incident:
 ## 🧹 Regular Maintenance
 
 ### Weekly
+
 - [ ] **Review CloudWatch alarms**
 - [ ] **Check for failed health checks**
 - [ ] **Review application logs** for errors
 
 ### Monthly
+
 - [ ] **Review AWS bill** for anomalies
 - [ ] **Update dependencies** (npm, Docker images)
 - [ ] **Review security group rules**
@@ -212,6 +232,7 @@ If you detect a security incident:
 - [ ] **Review CloudTrail logs** for suspicious activity
 
 ### Quarterly
+
 - [ ] **Rotate credentials** (DB password, JWT secret)
 - [ ] **Review IAM permissions** (remove unused)
 - [ ] **Update SSL certificates** (if not using ACM)
@@ -219,6 +240,7 @@ If you detect a security incident:
 - [ ] **Review and update documentation**
 
 ### Annually
+
 - [ ] **Full security audit**
 - [ ] **Penetration testing** (if required)
 - [ ] **Disaster recovery drill**
@@ -229,6 +251,7 @@ If you detect a security incident:
 ## ⚠️ Common Vulnerabilities to Avoid
 
 ### OWASP Top 10
+
 1. **Injection** → Use parameterized queries, validate inputs
 2. **Broken Authentication** → Strong passwords, MFA, session management
 3. **Sensitive Data Exposure** → Encrypt at rest and in transit
@@ -246,8 +269,8 @@ If you detect a security incident:
 
 Keep these handy:
 
-- **AWS Support**: https://console.aws.amazon.com/support/
-- **AWS Trust & Safety**: abuse@amazonaws.com
+- **AWS Support**: <https://console.aws.amazon.com/support/>
+- **AWS Trust & Safety**: <abuse@amazonaws.com>
 - **Your team's on-call**: [Add your contact info]
 
 ---

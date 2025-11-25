@@ -6,6 +6,7 @@
 resource "aws_ecr_repository" "api" {
   name                 = "${var.project_name}-api"
   image_tag_mutability = "MUTABLE"
+  force_delete         = false # Keep images when destroying infrastructure
 
   image_scanning_configuration {
     scan_on_push = true
@@ -24,6 +25,7 @@ resource "aws_ecr_repository" "api" {
 resource "aws_ecr_repository" "angular" {
   name                 = "${var.project_name}-angular"
   image_tag_mutability = "MUTABLE"
+  force_delete         = false # Keep images when destroying infrastructure
 
   image_scanning_configuration {
     scan_on_push = true
@@ -42,6 +44,7 @@ resource "aws_ecr_repository" "angular" {
 resource "aws_ecr_repository" "react" {
   name                 = "${var.project_name}-react"
   image_tag_mutability = "MUTABLE"
+  force_delete         = false # Keep images when destroying infrastructure
 
   image_scanning_configuration {
     scan_on_push = true
