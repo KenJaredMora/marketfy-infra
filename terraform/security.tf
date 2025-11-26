@@ -8,22 +8,24 @@ resource "aws_security_group" "alb" {
   description = "Security group for Application Load Balancer"
   vpc_id      = aws_vpc.marketfy.id
 
-  # HTTP inbound
+  # HTTP inbound - Restricted to allowed IPs only
   ingress {
-    description = "HTTP from Internet"
+    description = "HTTP from allowed IPs only"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.allowed_cidr_blocks
+    #cidr_blocks = ["0.0.0.0/0"]   # Open to all (for testing), restrict in production
   }
 
-  # HTTPS inbound
+  # HTTPS inbound - Restricted to allowed IPs only
   ingress {
-    description = "HTTPS from Internet"
+    description = "HTTPS from allowed IPs only"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.allowed_cidr_blocks
+    #cidr_blocks = ["0.0.0.0/0"]   # Open to all (for testing), restrict in production
   }
 
   # All outbound

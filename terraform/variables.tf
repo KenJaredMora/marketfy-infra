@@ -150,7 +150,8 @@ variable "enable_waf" {
 variable "allowed_cidr_blocks" {
   description = "CIDR blocks allowed to access the application"
   type        = list(string)
-  default     = ["0.0.0.0/0"] # Allow all by default for this project, restrict in production or staging
+  #default     = ["0.0.0.0/0"] # Allow all by default for this project, restrict in production or staging
+  default     = ["130.41.174.14/32"] # Restricted to my IP only. Update this if IP changes.
 }
 
 variable "admin_cidr_blocks" {
