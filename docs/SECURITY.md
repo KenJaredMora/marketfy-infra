@@ -300,5 +300,3 @@ Before going to production:
 - [AWS Well-Architected Framework - Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html)
 
 ---
-
-**Remember**: Security is not a one-time task, it's an ongoing process! 🔒
