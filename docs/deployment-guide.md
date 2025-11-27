@@ -138,9 +138,6 @@ docker-compose down
 ```powershell
 cd terraform
 
-# Copy example file
-cp terraform.tfvars.example terraform.tfvars
-
 # Edit terraform.tfvars with your values
 notepad terraform.tfvars
 ```
