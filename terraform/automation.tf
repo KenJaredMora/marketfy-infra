@@ -110,9 +110,9 @@ resource "null_resource" "seed_database" {
               --output text
 
             if ($exitCode -eq "0") {
-              echo "✅ Database seeded successfully!"
+              echo " Database seeded successfully!"
             } else {
-              echo "❌ Seed task failed with exit code: $exitCode"
+              echo " Seed task failed with exit code: $exitCode"
             }
             break
           }
