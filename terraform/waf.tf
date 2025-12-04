@@ -13,7 +13,7 @@ resource "aws_wafv2_web_acl" "main" {
     allow {}
   }
 
-  # Rule 1: Rate Limiting - Prevent DDoS and abuse
+  # Rule 1: Rate Limiting - Prevent DDoS and abuse   --> A distributed denial-of-service (DDoS) attack is a malicious attempt to disrupt normal traffic to a web property.
   rule {
     name     = "RateLimitRule"
     priority = 1
