@@ -7,6 +7,9 @@ AWS deployment infrastructure for Marketfy e-commerce platform using Terraform, 
 **Status**: ✅ Production Active
 
 - **Load Balancer**: [marketfy-alb-646939327.us-east-1.elb.amazonaws.com](http://marketfy-alb-1492993669.us-east-1.elb.amazonaws.com)
+
+Note: For security purposes just reacheable with IP.
+
 - **Region**: us-east-1
 - **Cluster**: marketfy-cluster
 - **Database**
