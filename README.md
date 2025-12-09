@@ -1,4 +1,4 @@
-# Marketfy Infrastructure
+# Marketfy Infrastructure Project
 
 AWS deployment infrastructure for Marketfy e-commerce platform using Terraform, Docker, and ECS.
 
